@@ -1,15 +1,13 @@
 require 'sinatra'
 
-module Content
-  IMAGES = [
-    "0.jpg"
-  ]
-end
-
 class Channing < Sinatra::Base
   get'/' do
+    channings = Dir.entries("public").reject do |f|
+      [".", "..", ".gitkeep"].include?(f)
+    end
+
     erb :index, :locals => {
-      :channing => Content::IMAGES.sample
+      :channing => channings.sample
     }
   end
 end
